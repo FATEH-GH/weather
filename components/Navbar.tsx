@@ -77,13 +77,13 @@ export default function Navbar({ location, place, loading, setPlace }: Props) {
         try {
           setLoadingCity(true);
           const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
-          )
-            .then((res) => res.json())
-            .catch((err) => console.info(err));
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+          );
+          const data = await response.json();
           setTimeout(() => {
             setLoadingCity(false);
-            setPlace(response.data!.name);
+            console.log(data);
+            setPlace(data!.name);
           }, 500);
         } catch (error) {
           setLoadingCity(false);
@@ -96,7 +96,7 @@ export default function Navbar({ location, place, loading, setPlace }: Props) {
       <nav className="shadow-sm  sticky top-0 left-0 z-50 bg-white">
         <div className="h-[80px]     w-full    flex   justify-between items-center  max-w-7xl px-3 mx-auto">
           <p className="flex items-center justify-center gap-2  ">
-            <h2 className="text-gray-500 text-3xl">Weather</h2>
+            <span className="text-gray-500 text-3xl">Weather</span>
             <MdWbSunny className="text-3xl mt-1 text-yellow-300" />
           </p>
           {/*  */}
