@@ -13,8 +13,6 @@ type Props = {
   setPlace: any;
 };
 
-const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
-
 export default function Navbar({ location, place, loading, setPlace }: Props) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
@@ -28,7 +26,7 @@ export default function Navbar({ location, place, loading, setPlace }: Props) {
     if (value.length >= 3) {
       try {
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}`
         );
         const data = await response.json();
         console.log("location, place :", location, place);
@@ -128,25 +126,6 @@ export default function Navbar({ location, place, loading, setPlace }: Props) {
           </section>
         </div>
       </nav>
-      <section className="flex   max-w-7xl px-3 md:hidden ">
-        <div className="relative ">
-          {/* SearchBox */}
-
-          <SearchBox
-            value={city}
-            onSubmit={handleSubmiSearch}
-            onChange={(e) => handleInputChang(e.target.value)}
-          />
-          <SuggetionBox
-            {...{
-              showSuggestions,
-              suggestions,
-              handleSuggestionClick,
-              error,
-            }}
-          />
-        </div>
-      </section>
     </>
   );
 }
