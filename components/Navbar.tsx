@@ -6,17 +6,21 @@ import { MdOutlineLocationOn, MdWbSunny } from "react-icons/md";
 import { MdMyLocation } from "react-icons/md";
 import SearchBox from "./Searchbox";
 import { useState } from "react";
-type Props = { location?: string; Place?: string; loading?: boolean };
+type Props = {
+  location?: string;
+  place?: string;
+  loading?: boolean;
+  setPlace: any;
+};
 
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_KEY;
 
-export default function Navbar({ location, Place, loading }: Props) {
+export default function Navbar({ location, place, loading, setPlace }: Props) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   //
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [place, setPlace] = useState(Place);
   const [loadingCity, setLoadingCity] = useState(loading);
 
   async function handleInputChang(value: string) {
@@ -25,11 +29,13 @@ export default function Navbar({ location, Place, loading }: Props) {
       try {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
-        )
-          .then((res) => res.json())
-          .catch((err) => console.info(err));
+        );
+        const data = await response.json();
+        console.log("location, place :", location, place);
 
-        const suggestions = response.data.list.map((item: any) => item.name);
+        console.log("the data from navbar", data);
+
+        const suggestions = data.list.map((item: any) => item.name);
         setSuggestions(suggestions);
         setError("");
         setShowSuggestions(true);
@@ -77,7 +83,7 @@ export default function Navbar({ location, Place, loading }: Props) {
             .catch((err) => console.info(err));
           setTimeout(() => {
             setLoadingCity(false);
-            setPlace(response.data.name);
+            setPlace(response.data!.name);
           }, 500);
         } catch (error) {
           setLoadingCity(false);

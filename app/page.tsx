@@ -11,12 +11,11 @@ import { convertWindSpeed } from "@/lib/utils";
 import { getDayOrNightIcon } from "@/lib/utils";
 import { metersToKilometers } from "@/lib/utils";
 import { format, fromUnixTime, parseISO } from "date-fns";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { WeatherData } from "@/types";
 
 export default function Home() {
-  const [place, setPlace] = useState("algeria");
+  const [place, setPlace] = useState("india");
   const [loadingCity] = useState(false);
   const [data, setData] = useState<WeatherData>();
 
@@ -38,7 +37,7 @@ export default function Home() {
 
       const data = await response.json();
 
-      console.log("the data", data);
+      // console.log("the data", data);
       setData(data);
     };
     fetchData();
@@ -48,7 +47,8 @@ export default function Home() {
 
   // console.log("error", error);
 
-  console.log("first data", firstData);
+  // console.log("first data", firstData);
+  // console.log("place from page:", place);
 
   const uniqueDates = [
     // @ts-ignore
@@ -70,7 +70,12 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen ">
-      <Navbar location={data?.city.name} loading={loadingCity} />
+      <Navbar
+        location={data?.city.name}
+        loading={loadingCity}
+        setPlace={setPlace}
+        place={place}
+      />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
         {/* today data  */}
         {loadingCity ? (
@@ -80,9 +85,9 @@ export default function Home() {
             <section className="space-y-4 ">
               <div className="space-y-2">
                 <h2 className="flex gap-1 text-2xl  items-end ">
-                  <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
+                  {/* <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p> */}
                   <p className="text-lg">
-                    ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})
+                    {/* ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")}) */}
                   </p>
                 </h2>
                 <Container className=" gap-10 px-6 items-center">
