@@ -31,9 +31,9 @@ export default function ForecastWeatherDetail(
     description,
   } = props;
   return (
-    <Container className="gap-4">
+    <Container className="gap-4 dark:bg-gray-300 dark:text-black border-0">
       {/* left */}
-      <section className=" flex max-sm:flex-col justify-center gap-4 items-center px-4  ">
+      <section className=" flex max-sm:flex-col justify-center gap-4 items-center px-4   ">
         <div className=" flex flex-col gap-1 items-center">
           <WeatherIcon iconName={weatehrIcon} />
           <p>{date}</p>
