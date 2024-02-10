@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 import { WeatherData } from "@/types";
 
 export default function Home() {
-  const [place, setPlace] = useState("india");
+  const [place, setPlace] = useState("algeria");
   const [loadingCity] = useState(false);
   const [data, setData] = useState<WeatherData>();
 
@@ -251,5 +251,3 @@ function WeatherSkeleton() {
     </section>
   );
 }
-
-// https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56

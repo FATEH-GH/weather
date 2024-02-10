@@ -33,14 +33,13 @@ export default function ForecastWeatherDetail(
   return (
     <Container className="gap-4">
       {/* left */}
-      <section className=" flex gap-4 items-center px-4  ">
+      <section className=" flex max-sm:flex-col justify-center gap-4 items-center px-4  ">
         <div className=" flex flex-col gap-1 items-center">
           <WeatherIcon iconName={weatehrIcon} />
           <p>{date}</p>
           <p className="text-sm">{day} </p>
         </div>
 
-        {/*  */}
         <div className="flex flex-col px-4">
           <span className="text-5xl">{convertKelvinToCelsius(temp ?? 0)}°</span>
           <p className="text-xs space-x-1 whitespace-nowrap">
