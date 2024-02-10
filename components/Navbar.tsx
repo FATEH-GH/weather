@@ -9,17 +9,21 @@ import { useState } from "react";
 type Props = {
   location?: string;
   place?: string;
-  loading?: boolean;
   setPlace: any;
+  setLoadingCity: any;
 };
 
-export default function Navbar({ location, place, loading, setPlace }: Props) {
+export default function Navbar({
+  location,
+  place,
+  setLoadingCity,
+  setPlace,
+}: Props) {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   //
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [loadingCity, setLoadingCity] = useState(loading);
 
   async function handleInputChang(value: string) {
     setCity(value);

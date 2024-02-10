@@ -16,7 +16,7 @@ import { WeatherData } from "@/types";
 
 export default function Home() {
   const [place, setPlace] = useState("algeria");
-  const [loadingCity] = useState(false);
+  const [loadingCity, setLoadingCity] = useState(false);
   const [data, setData] = useState<WeatherData>();
 
   // const { isLoading, error, data, refetch } = useQuery<WeatherData>(
@@ -72,9 +72,9 @@ export default function Home() {
     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen ">
       <Navbar
         location={data?.city.name}
-        loading={loadingCity}
         setPlace={setPlace}
         place={place}
+        setLoadingCity={setLoadingCity}
       />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
         {/* today data  */}
