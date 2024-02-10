@@ -10,7 +10,7 @@ import { convertKelvinToCelsius } from "@/lib/utils";
 import { convertWindSpeed } from "@/lib/utils";
 import { getDayOrNightIcon } from "@/lib/utils";
 import { metersToKilometers } from "@/lib/utils";
-import { format, fromUnixTime, parseISO } from "date-fns";
+import { format, fromUnixTime, parse, parseISO } from "date-fns";
 import { useEffect, useState } from "react";
 import { WeatherData } from "@/types";
 import WeatherSkeleton from "@/components/WeatherSkeleton";
@@ -45,6 +45,13 @@ export default function Home() {
   }, [place]);
 
   const firstData = data?.list[0];
+  const parsedDate =
+    firstData && parse(firstData?.dt_txt, "yyyy-MM-dd HH:mm:ss", new Date());
+  const extractedDate = parsedDate && format(parsedDate, "yyyy-MM-dd");
+  const extractedDate2 = parsedDate && format(parsedDate, "EEEE");
+  console.log("***1****", extractedDate);
+  console.log("***1****", firstData?.dt_txt);
+  console.log("***3****", extractedDate2);
 
   // console.log("error", error);
 
@@ -86,9 +93,11 @@ export default function Home() {
             <section className="space-y-4 dark:bg-gray-400">
               <div className="space-y-2">
                 <h2 className="flex gap-1 text-2xl  items-end ">
-                  <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p>
+                  {/* <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p> */}
+                  <p>{parsedDate && format(parsedDate, "EEEE")}</p>
                   <p className="text-lg">
-                    ({format(parseISO(firstData?.dt_txt ?? ""), "dd.MM.yyyy")})
+                    {/* ({format(parseISO(firstData?.dt_txt ?? ""), "dd/MM/yyyy")}) */}
+                    ({parsedDate && format(parsedDate, " yyyy-MM-dd")})
                   </p>
                 </h2>
                 <Container className=" gap-10 px-6 items-center dark:bg-gray-300 dark:text-black border-0">
