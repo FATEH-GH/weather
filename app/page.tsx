@@ -17,7 +17,7 @@ import WeatherSkeleton from "@/components/WeatherSkeleton";
 
 export default function Home() {
   const [place, setPlace] = useState("algeria");
-  const [loadingCity, setLoadingCity] = useState(true);
+  const [loadingCity, setLoadingCity] = useState(false);
   const [data, setData] = useState<WeatherData>();
 
   // const { isLoading, error, data, refetch } = useQuery<WeatherData>(
