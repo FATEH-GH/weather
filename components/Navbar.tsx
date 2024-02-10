@@ -6,6 +6,7 @@ import { MdOutlineLocationOn, MdWbSunny } from "react-icons/md";
 import { MdMyLocation } from "react-icons/md";
 import SearchBox from "./Searchbox";
 import { useState } from "react";
+import { ModeToggle } from "./ModeToggle";
 type Props = {
   location?: string;
   place?: string;
@@ -95,11 +96,13 @@ export default function Navbar({
   }
   return (
     <>
-      <nav className="shadow-sm  sticky top-0 left-0 z-50 bg-white">
+      <nav className="shadow-sm  sticky top-0 left-0 z-50 bg-white dark:bg-gray-700 transition-all duration-150 ">
         <div className="h-[80px]     w-full    flex   justify-between items-center  max-w-7xl px-3 mx-auto">
           <p className="flex items-center justify-center gap-2  ">
-            <span className="text-gray-500 text-3xl">Weather</span>
-            <MdWbSunny className="text-3xl mt-1 text-yellow-300" />
+            <span className="text-gray-500 dark:text-white text-xl sm:text-3xl">
+              Weather
+            </span>
+            <MdWbSunny className=" text-xl sm:text-3xl mt-1 text-yellow-300" />
           </p>
           {/*  */}
           <section className="flex gap-2 items-center">
@@ -109,7 +112,10 @@ export default function Navbar({
               className="text-2xl hidden sm:block text-gray-400 hover:opacity-80 cursor-pointer"
             />
             <MdOutlineLocationOn className="text-3xl hidden sm:block" />
-            <p className="text-slate-900/80 text-sm"> {location} </p>
+            <p className="text-slate-900/80 dark:text-white text-sm">
+              {" "}
+              {location}{" "}
+            </p>
             <div className="relative flex">
               {/* SearchBox */}
 
@@ -128,6 +134,7 @@ export default function Navbar({
               />
             </div>
           </section>
+          <ModeToggle />
         </div>
       </nav>
     </>
@@ -156,7 +163,7 @@ function SuggetionBox({
             <li
               key={i}
               onClick={() => handleSuggestionClick(item)}
-              className="cursor-pointer p-1 rounded   hover:bg-gray-200"
+              className="cursor-pointer p-1 rounded   hover:bg-gray-200 dark:text-black"
             >
               {item}
             </li>
