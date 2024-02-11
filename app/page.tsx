@@ -20,16 +20,6 @@ export default function Home() {
   const [loadingCity, setLoadingCity] = useState(false);
   const [data, setData] = useState<WeatherData>();
 
-  // const { isLoading, error, data, refetch } = useQuery<WeatherData>(
-  //   "repoData",
-  //   async () => {
-  //     const { data } = await axios.get(
-  //       `https://api.openweathermap.org/data/2.5/forecast?q=${place}&appid=${process.env.NEXT_PUBLIC_WEATHER_KEY}&cnt=56`
-  //     );
-  //     return data;
-  //   }
-  // );
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -47,16 +37,6 @@ export default function Home() {
   const firstData = data?.list[0];
   const parsedDate =
     firstData && parse(firstData?.dt_txt, "yyyy-MM-dd HH:mm:ss", new Date());
-  const extractedDate = parsedDate && format(parsedDate, "yyyy-MM-dd");
-  const extractedDate2 = parsedDate && format(parsedDate, "EEEE");
-  console.log("***1****", extractedDate);
-  console.log("***1****", firstData?.dt_txt);
-  console.log("***3****", extractedDate2);
-
-  // console.log("error", error);
-
-  // console.log("first data", firstData);
-  // console.log("place from page:", place);
 
   const uniqueDates = [
     // @ts-ignore
@@ -93,10 +73,8 @@ export default function Home() {
             <section className="space-y-4 dark:bg-gray-400">
               <div className="space-y-2">
                 <h2 className="flex gap-1 text-2xl  items-end ">
-                  {/* <p>{format(parseISO(firstData?.dt_txt ?? ""), "EEEE")}</p> */}
                   <p>{parsedDate && format(parsedDate, "EEEE")}</p>
                   <p className="text-lg">
-                    {/* ({format(parseISO(firstData?.dt_txt ?? ""), "dd/MM/yyyy")}) */}
                     ({parsedDate && format(parsedDate, " yyyy-MM-dd")})
                   </p>
                 </h2>
